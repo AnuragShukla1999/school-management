@@ -32,6 +32,22 @@ const ClassSection = () => {
 
 
     return (
-        <ClassContainer></ClassContainer>
+        <ClassContainer>
+            <SidebarContainer>
+                <Sidebar/>
+            </SidebarContainer>
+
+            <Content>
+                <ClassHeader>Classes</ClassHeader>
+
+                <ClassList>
+                    {classes.map((classItem, index) => (
+                        <ClassItem>
+                            <h3>{classItem.grade}</h3>
+                        </ClassItem>
+                    ))}
+                </ClassList>
+            </Content>
+        </ClassContainer>
     )
 }
