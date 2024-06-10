@@ -2,13 +2,13 @@
 import React from 'react';
 import Sidebar from './Sidebar';
 import {
-  PerformanceContainer,
-  Content,
-  PerformanceContent,
-  PerformanceHeader,
-  SchoolPerformance,
-  IndividualPerformance,
-} from '../../styles/PerformanceStyles'; 
+    PerformanceContainer,
+    Content,
+    PerformanceContent,
+    PerformanceHeader,
+    SchoolPerformance,
+    IndividualPerformance,
+} from '../../styles/PerformanceStyles';
 
 
 const Performance = () => {
@@ -26,31 +26,33 @@ const Performance = () => {
         { id: 1, name: 'John Doe', score: 90 },
     ];
 
-  return (
-    <PerformanceContainer>
-        <Sidebar />
+    return (
+        <PerformanceContainer>
+            <Sidebar />
 
-        <Content>
-            <PerformanceContent>School Performance</PerformanceContent>
+            <Content>
+                <PerformanceContent>
+                    <PerformanceHeader>School Performance</PerformanceHeader>
 
-            <SchoolPerformance>
-                <p>Average Score: {schoolPerformanceData.averageScore}</p>
+                    <SchoolPerformance>
+                        <p>Average Score: {schoolPerformanceData.averageScore}</p>
 
-                <p>Total Students: {schoolPerformanceData.totalStudents}</p>
-            </SchoolPerformance>
+                        <p>Total Students: {schoolPerformanceData.totalStudents}</p>
+                    </SchoolPerformance>
 
-            <PerformanceHeader>Individual Performance</PerformanceHeader>
+                    <PerformanceHeader>Individual Performance</PerformanceHeader>
 
-            <IndividualPerformance>
-                {individualPerformanceData.map((student) => (
-                    <p key={student.id} >
-                        {student.name}: {student.score}
-                    </p>
-                ))}
-            </IndividualPerformance>
-        </Content>
-    </PerformanceContainer>
-  );
+                    <IndividualPerformance>
+                        {individualPerformanceData.map((student) => (
+                            <p key={student.id} >
+                                {student.name}: {student.score}
+                            </p>
+                        ))}
+                    </IndividualPerformance>
+                </PerformanceContent>
+            </Content>
+        </PerformanceContainer>
+    );
 };
 
 export default Performance;
