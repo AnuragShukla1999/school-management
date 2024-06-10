@@ -1,4 +1,5 @@
 // Students.js
+
 import React, { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import axios from 'axios';
@@ -38,13 +39,70 @@ const Students = () => {
         e.preventDefault();
 
         if (newStudent.name.trim() !== '' && newStudent.registrationNumber.trim() !== '' & newStudent.grade.trim() !== '') {
-            
+            try {
+              const response = await axios.post('http://localhost:4000/api/v1/students', newStudent);
+
+              setStudents([...students, response.data.student]);
+
+              setNewStudent({ name: '', registrationNumber: '', grade: '' });
+            } catch (error) {
+               console.log('Error adding student:', error);
+            }
         }
-    }
+    };
 
   return (
-    <div>Students</div>
-  )
-}
+    <StudentsContainer>
+        <Sidebar />
 
-export default Students
+        <Content>
+          <StudentsContent>
+             <StudentsHeader>Students</StudentsHeader>
+
+             <AddStudentForm onSubmit={handleAddStudent} >
+                <AddStudentInput
+                  type="text"
+                  placeholder="Enter student name"
+                  value={newStudent.name}
+                  onChange={(e) => setNewStudent({ ...newStudent, name: e.target.value })}
+                />
+
+
+                <AddStudentInput
+                    type="text"
+                    placeholder="Enter registration number"
+                    value={newStudent.registrationNumber}
+                    onChange={(e) => setNewStudent({ ...newStudent, registrationNumber: e.target.value })}
+                />
+
+
+                <AddStudentInput 
+                    type="text"
+                    placeholder="Enter registration number"
+                    value={newStudent.registrationNumber}
+                    onChange={(e) => setNewStudent({ ...newStudent, registrationNumber: e.target.value })}
+                />
+
+
+                <AddStudentInput
+                    type="text"
+                    placeholder="Enter grade"
+                    value={newStudent.grade}
+                    onChange={(e) => setNewStudent({ ...newStudent, grade: e.target.value })}
+                />
+
+                <AddStudentButton type="submit" >Add Student</AddStudentButton>
+             </AddStudentForm>
+
+             <StudentList>
+              {students.map((student) => (
+                <StudentItem key={student.id} >{student.name} - {student.registrationNumber} - {student.grade}</StudentItem>
+              ))}
+             </StudentList>
+          </StudentsContent>
+        </Content>
+    </StudentsContainer>
+  );
+};
+
+export default Students;
